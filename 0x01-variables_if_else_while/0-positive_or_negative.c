@@ -6,7 +6,7 @@
 /**
  * main - conditional statement on variable n
  *
- * Return: 0 (Success)
+ * Return: return is always 0
  */
 
 int main(void)
