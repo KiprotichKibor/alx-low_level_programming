@@ -13,20 +13,22 @@ char *str_concat(char *s1, char *s2)
 
 	if (s1 == NULL)
 		s1 = "";
+	if (s2 == NULL)
+		s2 = "";
 
 	i = j = 0;
 	while (s1[i] != '\0')
 		i++;
 	while (s2[j] != '\0')
 		j++;
-	conct = malloc((i + j + 1) * sizeof(char));
+	conct = malloc(sizeof(char) * (i + j + 1));
 
 	if (conct == NULL)
 		return (NULL);
 	i = j = 0;
 	while (s1[i] != '\0')
 	{
-		conct[i] = s2[j];
+		conct[i] = s1[i];
 		i++;
 	}
 	while (s2[j] != '\0')
