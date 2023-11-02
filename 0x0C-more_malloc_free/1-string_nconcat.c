@@ -11,42 +11,41 @@
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
 	char *ptr;
-	size_t s1Len;
-	size_t s2Len;
+	size_t s1Len = 0;
+	size_t s2Len = 0;
 	unsigned int i;
 
 	if (s1 == NULL)
-	{
 		s1 = "";
-	}
 	if (s2 == NULL)
-	{
 		s2 = "";
-	}
-	s1Len = 0;
-	while (s1[s1Len] != '\0')
-	{
+	for (i = 0; s1[i] != '\0'; i++)
 		s1Len++;
-	}
-	s2Len = 0;
-	while (s2[s2Len] != '\0')
-	{
+	for (i = 0; s2[i] != '\0'; i++)
 		s2Len++;
-	}
-	ptr = malloc(s1Len + n + 1);
+	ptr = malloc(sizeof(char) * (s1Len + n) + 1);
 	if (ptr == NULL)
-	{
 		return (NULL);
-	}
-	for (i = 0; i < n; i++)
+	if (n >= s2Len)
 	{
-		ptr[i] = s1[i];
+		for (i = 0; i < n; i++)
+		{
+			ptr[i] = s1[i];
+		}
+		for (i = 0; i < n; i++)
+		{
+			ptr[s1Len + i] = s2[i];
+		}
+		ptr[s1Len + n] = '\0';
 	}
-	for (i = 0; i < n; i++)
+	else
 	{
-		ptr[s1Len + i] = s2[i];
+		for (i = 0; s1[i] != '\0'; i++)
+			ptr[i] = s1[i];
+		for (i = 0; i < n; i++)
+			ptr[s1Len + i] = s2[i];
+		ptr[s1Len + i] = '\0';
 	}
-	ptr[s1Len + n] = '\0';
 
 	return (ptr);
 }
