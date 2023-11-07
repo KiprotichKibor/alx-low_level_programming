@@ -18,10 +18,12 @@ int _strlen(char *s)
 }
 
 /**
- * _strcpy - copies strings
- * @dest: destination
- * @src: source
- * @Return: destination string dest
+ * _strcpy - copies the string pointed to by src
+ * including the terminating byte ('\0')
+ * to the buffer poited to by dest
+ * @dest: a pointer to the destination string where copy will be stored
+ * @src: a pointer to the source string to be copied
+ * Return: dest
  */
 char *_strcpy(char *dest, char *src)
 {
