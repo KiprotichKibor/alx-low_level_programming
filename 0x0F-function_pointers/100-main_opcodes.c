@@ -2,16 +2,31 @@
 #include <stdlib.h>
 #include "3-calc.h"
 /**
- * main - prints the opcodes of its own main function
+ * print_opcodes - print opcodes for main
+ * @c: parameter 1
+ * @n: parameter 2
+ * Return: void
+ */
+void print_opcodes(char *c, int n)
+{
+	int i;
+
+	for (i = 0; i < n; i++)
+	{
+		printf("%.2hhx", c[i]);
+		if (i < n - 1)
+			printf(" ");
+	}
+	printf("\n");
+}
+/**
+ * main - main function
  * @argc: argument count
  * @argv: argument vector
  * Return: 0
  */
 int main(int argc, char *argv[])
 {
-	int numberOfBytes;
-	unsigned char *mainAddress;
-	unsigned char *main;
 	int i;
 
 	if (argc != 2)
@@ -19,18 +34,13 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(1);
 	}
-	numberOfBytes = atoi(argv[1]);
-	if (numberOfBytes < 0)
+	i = atoi(argv[1]);
+	if (i < 0)
 	{
 		printf("Error\n");
 		exit(2);
 	}
-	mainAddress = main;
-	for (i = 0; i < numberOfBytes; i++)
-	{
-		printf("%02x ", mainAddress[i]);
-	}
-	printf("\n");
+	print_opcodes((char *)&main, i);
 
 	return (0);
 
