@@ -1,10 +1,10 @@
 #include "lists.h"
-void beforeMain(void)__attribute__ ((constructor));
+void BeforeMain(void)__attribute__ ((constructor));
 /**
- * beforeMain - a functions that runs before main
+ * BeforeMain - a functions that runs before main
  * Return: void
  */
-void beforeMain(void)
+void BeforeMain(void)
 {
 	printf("You're beat! and yet, you must allow, \n");
 	printf("I bore my house upon my back!\n");
