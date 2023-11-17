@@ -1,9 +1,17 @@
-global main
+section .data
+	hello_message db "Hello, Holberton", 0xA, 0
+
+section .text
 	extern printf
+	global main
+
 main:
-	mov edi, format
-	xor eax, eax
+	sub rsp, 8 ; align stack
+
+	lea rdi, [rel hello_message]
 	call printf
-	mov	eax, 0
+
+	add rsp, 8 ; restore stack
+
+	mov eax, 0
 	ret
-format: db 'Hello, Holberton', 0
