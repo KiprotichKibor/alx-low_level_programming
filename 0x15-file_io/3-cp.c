@@ -14,7 +14,7 @@ void check_IO_stat(int stat, int fd, char *filename, char mode);
  */
 int main(int argc, char *argv[])
 {
-	int fd_from, fd_to, len = 1024, wrote, close_fd_from, close_fd_to;
+	int src, dest, len = 1024, wrote, close_src, close_dest;
 	unsigned int mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
 	char buffer[1024];
 
@@ -23,23 +23,23 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "%s", "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-	fd_from = open(argv[1], O_RDONLY);
-	check_IO_stat(fd_from, -1, argv[1], 'O');
-	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, mode);
-	check_IO_stat(fd_to, -1, argv[2], 'W');
+	src = open(argv[1], O_RDONLY);
+	check_IO_stat(src, -1, argv[1], 'O');
+	dest = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, mode);
+	check_IO_stat(dest, -1, argv[2], 'W');
 	while (len == 1024)
 	{
-		len = read(fd_from, buffer, sizeof(buffer));
+		len = read(src, buffer, sizeof(buffer));
 		if (len == -1)
 			check_IO_stat(-1, -1, argv[1], 'O');
-		wrote = write(fd_to, buffer, len);
+		wrote = write(dest, buffer, len);
 		if (wrote == -1)
 			check_IO_stat(-1, -1, argv[2], 'W');
 	}
-	close_fd_from = close(fd_from);
-	check_IO_stat(close_fd_from, fd_from, NULL, 'C');
-	close_fd_to = close(fd_to);
-	check_IO_stat(close_fd_to, fd_to, NULL, 'C');
+	close_src = close(src);
+	check_IO_stat(close_src, src, NULL, 'C');
+	close_dest = close(dest);
+	check_IO_stat(close_dest, dest, NULL, 'C');
 	return (0);
 }
 /**
