@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 	}
 	src = open(argv[1], O_RDONLY);
 	check_IO_stat(src, -1, argv[1], 'O');
-	dest = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, mode);
+	dest = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | mode);
 	check_IO_stat(dest, -1, argv[2], 'W');
 	while (len == 1024)
 	{
